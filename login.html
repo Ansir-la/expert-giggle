@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录授权</title>
+  <style>
+    /* 添加简单的样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    input {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>登录授权</h2>
+  <form id="loginForm">
+    <label for="username">用户名:</label>
+    <input type="text" id="username" name="username" value="wttnb666">
+    <br>
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password" value="527841878">
+    <br>
+    <button type="button" onclick="login()">登录</button>
+  </form>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        alert("用户名或密码不能为空");
+        return;
+      }
+
+      // 将请求发送到服务器
+      fetch('https://your-server.com/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('登录成功');
+        } else {
+          alert('登录失败');
+        }
+      })
+      .catch(error => {
+        console.error('登录失败:', error);
+      });
+    }
+  </script>
+</body>
+</html>
